@@ -9,6 +9,8 @@ public interface MemberRepository {
 
     Member save(Member member); // 저장소에 회원 정보 저장
     Optional<Member> findById(Long id); //Null 반환 시 Optional 로 감싸서 반환
-    Optional<Member> findByNane(String name);
+    Optional<Member> findByName(String name);
     List<Member> findAll();
+
+
 }

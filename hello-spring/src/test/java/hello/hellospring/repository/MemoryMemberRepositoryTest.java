@@ -41,7 +41,7 @@ class MemoryMemberRepositoryTest {
         member2.setName("박찬석");
         repository.save(member2);
 
-        Member result=repository.findByNane("박찬석").get();
+        Member result=repository.findByName("박찬석").get();
 
         assertThat(result).isEqualTo(member2);
         System.out.println(result);
