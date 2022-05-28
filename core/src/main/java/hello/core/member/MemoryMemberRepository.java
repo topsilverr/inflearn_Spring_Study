@@ -14,6 +14,6 @@ public class MemoryMemberRepository implements MemberRepository{
 
     @Override
     public Member findById(Long memberId) {
-        return null;
+        return store.get(memberId);
     }
 }
