@@ -8,7 +8,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 public class BeanDefinitionTest {
 
-    AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+    AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class); // ApplicationConText 로 하면 getBeanDefinition 사용 불가 => AnnotationConfigApplicationContext 사용
 
     @Test
     @DisplayName("빈 설정 메타정보(BeanDefinition) 확인")
