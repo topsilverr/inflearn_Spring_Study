@@ -12,10 +12,11 @@ public class OrderServiceImpl implements OrderService{
 
 
 
-    private final MemberRepository memberRepository;
+    private final MemberRepository memberRepository; //불변
+    private DiscountPolicy discountPolicy; //불변
     // private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
     //private final DiscountPolicy discountPolicy = new RateDiscountPolicy(); // 이렇게 바꾸는 순간 ocp(개방-폐쇄 원칙) 위반 * ocp: 확장에는 열려있으나 변경에는 닫혀있어야 함.
-    private DiscountPolicy discountPolicy;
+
 
     @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
