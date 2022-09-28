@@ -48,7 +48,7 @@ public class FrontControllerServletV3 extends HttpServlet {
         ModelView mv = controller.process(paramMap); // view의 논리 이름만 받아옴
 
         String viewName = mv.getViewName();
-        MyView view = viewResolver(viewName); // 실제 url 형성
+        MyView view = viewResolver(viewName); // 물리 뷰 경로 형성
 
         view.render(mv.getModel(),request,response); // MyView에 선언된 render
     }
