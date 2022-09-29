@@ -6,7 +6,11 @@ import hello.servlet.web.frontcontroller.V3.ControllerV3;
 import hello.servlet.web.frontcontroller.V3.controller.MemberFormControllerV3;
 import hello.servlet.web.frontcontroller.V3.controller.MemberListControllerV3;
 import hello.servlet.web.frontcontroller.V3.controller.MemberSaveControllerV3;
+import hello.servlet.web.frontcontroller.V4.controller.MemberFormControllerV4;
+import hello.servlet.web.frontcontroller.V4.controller.MemberListControllerV4;
+import hello.servlet.web.frontcontroller.V4.controller.MemberSaveControllerV4;
 import hello.servlet.web.frontcontroller.V5.adapter.ControllerV3HandlerAdapter;
+import hello.servlet.web.frontcontroller.V5.adapter.ControllerV4HandlerAdapter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,10 +38,16 @@ public class FrontControllerServletV5 extends HttpServlet {
         handlerMappingMap.put("/front-controller/v5/v3/members/new-form",new MemberFormControllerV3());
         handlerMappingMap.put("/front-controller/v5/v3/members/save",new MemberSaveControllerV3());
         handlerMappingMap.put("/front-controller/v5/v3/members",new MemberListControllerV3());
+
+        //V4 추가
+        handlerMappingMap.put("/front-controller/v5/v4/members/new-form",new MemberFormControllerV4());
+        handlerMappingMap.put("/front-controller/v5/v4/members/save",new MemberSaveControllerV4());
+        handlerMappingMap.put("/front-controller/v5/v4/members",new MemberListControllerV4());
     }
 
     private void initHandlerAdapters() {
         handlerAdapters.add(new ControllerV3HandlerAdapter());
+        handlerAdapters.add(new ControllerV4HandlerAdapter());
     }
 
     @Override
@@ -53,9 +63,10 @@ public class FrontControllerServletV5 extends HttpServlet {
         }
 
         //ControllerV3HandlerAdapter 반환됨
+        //ControllerV4HandlerAdapter 반환됨
         MyHandlerAdapter adapter = getHandlerAdapter(handler);
 
-
+        // MyHandlerAdapter의 자식들 중 하나의 handle 함수 실행 => mv 반환함
         ModelView mv = adapter.handle(request, response, handler);
 
         String viewName = mv.getViewName();
@@ -66,6 +77,7 @@ public class FrontControllerServletV5 extends HttpServlet {
 
     private MyHandlerAdapter getHandlerAdapter(Object handler) {
         // 현재 handlerAdapters 엔 ControllerV3HandlerAdapter 만 들어있음
+        // V5-V4 에는 ControllerV4HandlerAdapter 가 표함되어 있음
         // handler가 adapter의 인스턴스인지 확인하는 supports 호출
         for (MyHandlerAdapter adapter : handlerAdapters) {
             if(adapter.supports(handler)){
