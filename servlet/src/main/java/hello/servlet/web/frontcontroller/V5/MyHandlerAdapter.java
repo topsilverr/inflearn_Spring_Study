@@ -11,5 +11,6 @@ public interface MyHandlerAdapter {
 
     boolean supports (Object handler);
 
+    // ModelView 를 반환하도록 통일 -> Adapter 필요 이유
     ModelView handle(HttpServletRequest request, HttpServletResponse response, Object handler) throws ServletException, IOException;
 }

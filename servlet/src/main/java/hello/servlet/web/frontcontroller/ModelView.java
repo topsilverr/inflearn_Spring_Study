@@ -15,6 +15,4 @@ public class ModelView {
     public ModelView(String viewName) {
         this.viewName = viewName;
     }
-
-
 }
