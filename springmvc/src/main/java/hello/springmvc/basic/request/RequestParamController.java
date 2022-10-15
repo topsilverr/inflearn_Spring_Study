@@ -99,6 +99,7 @@ public class RequestParamController {
      * @RequestParam Map, MultiValueMap
      * Map(key=value)
      * MultiValueMap(key=[value1, value2, ...]) ex) (key=userIds, value=[id1, id2])
+     * 보통 파라미터 값 한 개 => Map 사용해도 무관
      */
     @ResponseBody
     @RequestMapping("/request-param-map")
