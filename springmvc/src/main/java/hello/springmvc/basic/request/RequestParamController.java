@@ -46,10 +46,33 @@ public class RequestParamController {
 
     /**
      * @RequestParam 사용
-     * String, int 등의 단순 타입이면 @RequestParam 도 생략 가능 */
+     * String, int 등의 "단순 타입"이면 @RequestParam 도 생략 가능
+     * 직관적이지 않음,,, 과해!
+     */
     @ResponseBody
     @RequestMapping("/request-param-v4")
     public String requestParamV4(String username, int age) {
+        log.info("username={}, age={}", username, age);
+        return "ok";
+    }
+
+    /**
+     * @RequestParam.required
+     * 기본값은 required=True
+     * /request-param-required -> username이 없으므로 예외
+     *
+     * 주의!
+     * /request-param-required?username= -> 빈문자로 통과
+     *
+     * 주의!
+     * /request-param-required
+     * int age -> null을 int에 입력하는 것은 불가능, 따라서 Integer 변경해야 함 (또는 다음에 나오는 defaultValue 사용)
+     */
+    @ResponseBody
+    @RequestMapping("/request-param-required")
+    public String requestParamRequired(
+            @RequestParam(required = true) String username,
+            @RequestParam(required = false) Integer age) {
         log.info("username={}, age={}", username, age);
         return "ok";
     }
