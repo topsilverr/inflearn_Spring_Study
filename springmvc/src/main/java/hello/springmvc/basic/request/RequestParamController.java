@@ -12,7 +12,7 @@ import java.io.IOException;
 @Controller
 public class RequestParamController {
 
-    @RequestMapping("/request-papram-v1")
+    @RequestMapping("/request-param-v1")
     public void requestParam(HttpServletRequest request, HttpServletResponse response)throws IOException{
         String username = request.getParameter("username");
         int age = Integer.parseInt(request.getParameter("age"));
