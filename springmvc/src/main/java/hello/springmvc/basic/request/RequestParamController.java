@@ -59,20 +59,37 @@ public class RequestParamController {
     /**
      * @RequestParam.required
      * 기본값은 required=True
-     * /request-param-required -> username이 없으므로 예외
+     * /request-param-required -> username 이 없으므로 예외
      *
      * 주의!
      * /request-param-required?username= -> 빈문자로 통과
      *
      * 주의!
      * /request-param-required
-     * int age -> null을 int에 입력하는 것은 불가능, 따라서 Integer 변경해야 함 (또는 다음에 나오는 defaultValue 사용)
+     * int age -> null 을 int 에 입력하는 것은 불가능, 따라서 Integer 변경해야 함 (또는 다음에 나오는 defaultValue 사용)
      */
     @ResponseBody
     @RequestMapping("/request-param-required")
     public String requestParamRequired(
-            @RequestParam(required = true) String username,
+            @RequestParam(required = true) String username, // null 과 "" 은 다름 => 그냥 빈문자가 들어오면 오류 안남
             @RequestParam(required = false) Integer age) {
+        log.info("username={}, age={}", username, age);
+        return "ok";
+    }
+
+    /**
+     * @RequestParam
+     * - defaultValue 사용
+     *
+     * 참고: defaultValue 는 빈 문자의 경우에도 적용
+     * /request-param-default?username=
+     * defaultValue 가 있는 경우에는 required 필요없음! => null 인 경우에도 defaultValue 가 채워주니까 required=True 위반 안 함
+     */
+    @ResponseBody
+    @RequestMapping("/request-param-default")
+    public String requestParamDefault(
+            @RequestParam(required = true, defaultValue = "guest") String username,
+            @RequestParam(required = false, defaultValue = "-1") int age) {
         log.info("username={}, age={}", username, age);
         return "ok";
     }
