@@ -5,6 +5,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -39,10 +41,18 @@ public class RequestBodyStringController {
 
     @PostMapping("/request-body-string-v3")
     public HttpEntity<String> requestBodyStringV3(HttpEntity<String> httpEntity) throws IOException {
-
-        String messageBody = httpEntity.getBody();
+        // get 의 쿼리파라미터 혹은 Html form 데이터를 전송하는 경우에만 요청 파라미터 조회 기능 사용 (ex. @RequestParam, @ModelAttribute)
+        String messageBody = httpEntity.getBody(); // 헤더 정보도 조회 가능 -> httpEntity.getHeaders()
         log.info("messageBody={}",messageBody);
 
         return new HttpEntity<>("ok");
+    }
+
+    @ResponseBody
+    @PostMapping("/request-body-string-v4")
+    public String requestBodyStringV4(@RequestBody String messageBody) throws IOException {
+        log.info("messageBody={}",messageBody);
+
+        return "ok";
     }
 }
