@@ -70,6 +70,14 @@ public class RequestBodyJsonController {
         return "ok";
     }
 
+    @ResponseBody
+    @PostMapping("/request-body-json-v5")
+    public HelloData requestBodyJsonV5(@RequestBody HelloData helloData) {
+        //Json 으로 변환된 HTTP 요청 메세지가 반환될 수 있음 => 변환된 Json 이 HTTP 응답 메세지 바디에 적용됨
+        log.info("username={}, age={}",helloData.getUsername(),helloData.getAge());
+
+        return helloData;
+    }
 
 
 }
