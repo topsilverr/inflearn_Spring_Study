@@ -66,10 +66,23 @@ public class basicItemController {
         return "basic/item";
     }
 
-    @PostMapping("/add")
+    //@PostMapping("/add")
     // @ModelAttribute : model 객체 생성해주기 & 괄호 안에 있는 이름으로 모델에 넣어주는 두 가지 역할을 행함
     // 괄호 안 이름 생략하면 현재 class명 즉 Item 의 첫 글자만 소문자로 바꾼 이름을 modelattribute 에 넣어줌
     public String addItemV3(@ModelAttribute Item item, Model model)
+    {
+        itemRepository.save(item);
+
+//        model.addAttribute("item",item); // 자동 추가가 되기 때문에 생략 가능
+
+        return "basic/item";
+    }
+
+    @PostMapping("/add")
+    // @ModelAttribute : model 객체 생성해주기 & 괄호 안에 있는 이름으로 모델에 넣어주는 두 가지 역할을 행함
+    // 괄호 안 이름 생략하면 현재 class명 즉 Item 의 첫 글자만 소문자로 바꾼 이름을 modelattribute 에 넣어줌
+    // 임의의 객체일 경우 @ModelAttribute 생략 가능
+    public String addItemV4(Item item, Model model)
     {
         itemRepository.save(item);
 
