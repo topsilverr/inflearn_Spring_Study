@@ -6,10 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -40,11 +37,34 @@ public class basicItemController {
         return "basic/addForm";
     }
 
-    @PostMapping("/add")
-    public String save(){
-        return "basic/addForm";
+    //@PostMapping("/add")
+    public String addItemV1(@RequestParam String itemName,
+                       @RequestParam int price,
+                       @RequestParam Integer quantity,
+                       Model model)
+    {
+        Item item = new Item();
+        item.setItemName(itemName);
+        item.setPrice(price);
+        item.setQuantity(quantity);
+
+        itemRepository.save(item);
+
+        model.addAttribute("item",item);
+
+        return "basic/item";
     }
 
+    @PostMapping("/add")
+    // @ModelAttribute : model 객체 생성해주기 & 괄호 안에 있는 이름으로 모델에 넣어주는 두 가지 역할을 행함
+    public String addItemV2(@ModelAttribute("item") Item item, Model model)
+    {
+        itemRepository.save(item);
+
+//        model.addAttribute("item",item); // 자동 추가가 되기 때문에 생략 가능
+
+        return "basic/item";
+    }
 
     /**
      *  테스트용 데이터 추가
