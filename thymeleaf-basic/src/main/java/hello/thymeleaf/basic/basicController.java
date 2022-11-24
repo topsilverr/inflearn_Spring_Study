@@ -23,12 +23,14 @@ public class basicController {
     @GetMapping("/text-basic")
     public String textBasic(Model model){
         model.addAttribute("data","hello spring!");
+
         return "basic/text-basic";
     }
 
     @GetMapping("/text-unescaped")
     public String textUnescaped(Model model){
         model.addAttribute("data","hello <b>spring</b>!");
+
         return "basic/text-unescaped";
     }
 
@@ -55,7 +57,14 @@ public class basicController {
     @GetMapping("/basic-objects")
     public String basicObjects(HttpSession session){
         session.setAttribute("sessionData","Hello Session");
+
         return "basic/basic-objects";
+    }
+
+    @GetMapping("/date")
+    public String date(Model model){
+        model.addAttribute("localDateTime", LocalDateTime.now());
+        return "/basic/date";
     }
 
     @GetMapping("/link")
@@ -69,13 +78,16 @@ public class basicController {
     @GetMapping("/literal")
     public String literal(Model model){
         model.addAttribute("data","Spring!");
+
         return "/basic/literal";
     }
 
-    @GetMapping("/date")
-    public String date(Model model){
-        model.addAttribute("localDateTime", LocalDateTime.now());
-        return "/basic/date";
+    @GetMapping("/operation")
+    public String operation(Model model){
+        model.addAttribute("nullData",null);
+        model.addAttribute("data","Spring!");
+
+        return "/basic/operation";
     }
 
     @Component("helloBean")
