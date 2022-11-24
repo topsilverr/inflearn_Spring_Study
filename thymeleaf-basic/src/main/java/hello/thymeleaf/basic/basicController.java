@@ -66,6 +66,12 @@ public class basicController {
         return "/basic/link";
     }
 
+    @GetMapping("/literal")
+    public String literal(Model model){
+        model.addAttribute("data","Spring!");
+        return "/basic/literal";
+    }
+
     @GetMapping("/date")
     public String date(Model model){
         model.addAttribute("localDateTime", LocalDateTime.now());
