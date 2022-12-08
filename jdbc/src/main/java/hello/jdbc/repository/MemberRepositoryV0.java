@@ -64,6 +64,28 @@ public class MemberRepositoryV0 {
         }
     }
 
+    public void update(String memberId, int money) throws SQLException {
+        String sql = "update member set money=? where member_id=?";
+
+        Connection con = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            con = getConnection();
+            pstmt=con.prepareStatement(sql);
+            pstmt.setInt(1,money);
+            pstmt.setString(2,memberId);
+            int resultSize = pstmt.executeUpdate();// 실행문 -> 여기서는 update 된 행의 수를 반환함
+            log.info("resultSize={}",resultSize);
+        } catch (SQLException e) {
+            log.error("db error",e);
+            throw e;
+        } finally {
+            close(con,pstmt,null);
+        }
+
+    }
+
     private void close(Connection con, Statement stmt, ResultSet rs){
 
         if(rs!=null){

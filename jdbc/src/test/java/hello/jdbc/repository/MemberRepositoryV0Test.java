@@ -17,7 +17,7 @@ class MemberRepositoryV0Test {
     @Test
     void crud() throws SQLException {
         //save
-        Member member = new Member("memberV5", 10000);
+        Member member = new Member("memberV7", 10000);
         repository.save(member);
         
         //findById
@@ -27,5 +27,10 @@ class MemberRepositoryV0Test {
         log.info("member equals findMember {}",member.equals(findMember));
         // 객체 자체는 다르지만 들어있는 데이터가 같기 때문에 equal 을 사용하면 같다고 출력됨
         assertThat(findMember).isEqualTo(member);
+
+        //update : money : 10000 -> 20000
+        repository.update(member.getMemberId(),20000);
+        Member updatedMember = repository.findById(member.getMemberId());
+        assertThat(updatedMember.getMoney()).isEqualTo(20000);
     }
 }
