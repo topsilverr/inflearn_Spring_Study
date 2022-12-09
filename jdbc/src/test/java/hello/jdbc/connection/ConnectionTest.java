@@ -40,7 +40,7 @@ public class ConnectionTest {
         dataSource.setPassword(PASSWORD);
         dataSource.setMaximumPoolSize(10);
         dataSource.setPoolName("MyPool");
-
+        // 풀이 다 찼을 때 어느 정도 기다릴건지 설정해주기 중요~
         useDataSource(dataSource);
         Thread.sleep(1000);
     }
