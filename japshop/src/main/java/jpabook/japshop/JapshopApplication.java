@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class JapshopApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(JapshopApplication.class, args);
 	}
 
