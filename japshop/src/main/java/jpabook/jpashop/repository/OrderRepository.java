@@ -1,12 +1,9 @@
-package jpabook.japshop.repository;
+package jpabook.jpashop.repository;
 
 import jakarta.persistence.EntityManager;
-import jpabook.japshop.domain.Order;
+import jpabook.jpashop.domain.Order;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
