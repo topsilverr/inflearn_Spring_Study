@@ -12,7 +12,7 @@ public class JpaMain {
         EntityManager em = emf.createEntityManager();
 
         // Database connection 하나 받았다고 생각하기 => getTransaction
-        EntityTransaction tx = em.getTransaction();
+        EntityTransaction tx = em.getTransaction(); // 데이터 변경이 있을 경우 반드시 선언
         tx.begin();
 
         try {
@@ -45,7 +45,7 @@ public class JpaMain {
             // 회원삭제
             // em.remove(findMember);
 
-            tx.commit();
+            tx.commit(); // 안 하면 DB에 반영 안 됨
         }catch (Exception e){
             tx.rollback();
         }finally {
