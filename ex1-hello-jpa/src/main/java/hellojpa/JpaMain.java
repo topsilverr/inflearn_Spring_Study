@@ -67,18 +67,24 @@ public class JpaMain {
             // 회원삭제
             // em.remove(findMember);
 
-            // 영속
-            Member member1 = new Member(150L,"A");
-            Member member2 = new Member(160L,"B");
+            Member findMember = em.find(Member.class, 150L);
+            // 찾은 member 의 이름을 변경했으니까,,, persist 혹은 update 어쩌구 호출해야되는거 아냐???
+            // 노노 아님
+            // 변경 감지 기능으로 엔티티 변경 가능 !
+            findMember.setName("AA");
+
+            // 영속 - 쓰기 지연
+            //Member member1 = new Member(150L,"A");
+            //Member member2 = new Member(160L,"B");
 
             // ======== 이후에 insert 쿼리 날림 즉 commit 해야 날아감
-            em.persist(member1);
-            em.persist(member2);
-            System.out.println("=============================");
+            //em.persist(member1);
+            //em.persist(member2);
+            //System.out.println("=============================");
+
             // 여기서 쿼리 날림
             // 쿼리 생성하여 쓰기 지연 SQL 저장소에 저장하고 엔티티는 1차 캐시에 저장함
             // 그치만 쿼리를 DB에 날리진 않음
-            //
             tx.commit(); // 안 하면 DB에 반영 안 됨
         }catch (Exception e){
             tx.rollback();
