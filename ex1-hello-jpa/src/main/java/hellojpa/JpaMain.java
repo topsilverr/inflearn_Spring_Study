@@ -37,9 +37,12 @@ public class JpaMain {
             //System.out.println("findMember.getName() = " + findMember.getName());
 
             // DB에 저장된 회원조회
-            Member findMember1 = em.find(Member.class, 100L); // 이때는 DB 에서 가져와야 하기 때문에 쿼리가 나가야하지만
-            Member findMember2 = em.find(Member.class, 100L); // 여기서는 1차캐시에서 가져와야 하기 때문에 쿼리가 나가면 안됨
+//            Member findMember1 = em.find(Member.class, 100L); // 이때는 DB 에서 가져와야 하기 때문에 쿼리가 나가야하지만
+//            Member findMember2 = em.find(Member.class, 100L); // 여기서는 1차캐시에서 가져와야 하기 때문에 쿼리가 나가면 안됨
             // 직접 돌려보면 select 쿼리 한 번만 나가는 것 확인 가능
+
+            // 영속 엔티티의 동일성 보장 => result = true 출력
+            //System.out.println(" result = " + (findMember1 == findMember2) );
 
             // Member 객체를 대상으로 조회
             // m -> entity
@@ -64,7 +67,18 @@ public class JpaMain {
             // 회원삭제
             // em.remove(findMember);
 
+            // 영속
+            Member member1 = new Member(150L,"A");
+            Member member2 = new Member(160L,"B");
+
+            // ======== 이후에 insert 쿼리 날림 즉 commit 해야 날아감
+            em.persist(member1);
+            em.persist(member2);
+            System.out.println("=============================");
             // 여기서 쿼리 날림
+            // 쿼리 생성하여 쓰기 지연 SQL 저장소에 저장하고 엔티티는 1차 캐시에 저장함
+            // 그치만 쿼리를 DB에 날리진 않음
+            //
             tx.commit(); // 안 하면 DB에 반영 안 됨
         }catch (Exception e){
             tx.rollback();
