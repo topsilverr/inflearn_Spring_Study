@@ -17,10 +17,18 @@ public class JpaMain {
 
         try {
             // 회원등록
+
+            // 비영속 상태
             //Member member = new Member();
             //member.setId(2L);
             //member.setName("HelloB");
+
+            // 영속상태 != DB 저장
             //em.persist(member);
+            // 준영속 상태 => 영속성 컨텍스트에서 지
+            //em.detach(member);
+            // 삭제 => 영구적으로 삭제 요청 (DB에서도!)
+            //em.remove(member);
 
             // Member 객체를 대상으로 조회
             // m -> entity
@@ -45,6 +53,7 @@ public class JpaMain {
             // 회원삭제
             // em.remove(findMember);
 
+            // 여기서 쿼리 날림
             tx.commit(); // 안 하면 DB에 반영 안 됨
         }catch (Exception e){
             tx.rollback();
