@@ -71,7 +71,7 @@ public class JpaMain {
             // 찾은 member 의 이름을 변경했으니까,,, persist 혹은 update 어쩌구 호출해야되는거 아냐???
             // 노노 아님
             // 변경 감지 기능으로 엔티티 변경 가능 !
-            findMember.setName("AA");
+            findMember.setName("AAAAA");
 
             // 영속 - 쓰기 지연
             //Member member1 = new Member(150L,"A");
@@ -81,6 +81,12 @@ public class JpaMain {
             //em.persist(member1);
             //em.persist(member2);
             //System.out.println("=============================");
+
+            // 준영속 상태 확인
+            em.clear();
+
+            Member member2 = em.find(Member.class, 150L);
+            System.out.println("=============================");
 
             // 여기서 쿼리 날림
             // 쿼리 생성하여 쓰기 지연 SQL 저장소에 저장하고 엔티티는 1차 캐시에 저장함
